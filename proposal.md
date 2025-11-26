@@ -32,9 +32,9 @@ Our project will be built in **Python** using the **Pygame** library for handlin
 We’ll structure development into several phases to keep work organized and collaborative.
 
 ### **Phase 1: Setup and Core Mechanics**
-- [ ] **Set up the GitHub repository and base project structure**  
+- [x] **Set up the GitHub repository and base project structure**  
   - *Responsible:* Thusa  
-- [ ] **Initialize Pygame window and basic snake movement**  
+- [x] **Initialize Pygame window and basic snake movement**  
   - *Responsible:* [Team member 2]  
 
 ### **Phase 2: Gameplay Logic**
