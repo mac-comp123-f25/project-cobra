@@ -35,7 +35,7 @@ We’ll structure development into several phases to keep work organized and col
 - [x] **Set up the GitHub repository and base project structure**  
   - *Responsible:* Thusa  
 - [x] **Initialize Pygame window and basic snake movement**  
-  - *Responsible:* [Team member 2]  
+  - *Responsible:* Elma and Kampe
 
 ### **Phase 2: Gameplay Logic**
 - [ ] **Implement random food placement and collision detection**  
