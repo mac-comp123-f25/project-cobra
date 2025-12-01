@@ -25,7 +25,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 # snake (from Game_Snake.py)
-snake = Snake(100, 50, 20)
+snake = Snake(100, 60, 20)
 
 #game objects (this ia from member1.py)
 food = Food(WIDTH, HEIGHT, 20)
@@ -75,7 +75,7 @@ def draw_game_over():
 def reset_game():
     """Reset everything"""
     global game_over, game_started
-    snake.body = [[100, 50], [80,50], [60,50]]
+    snake.body = [[100, 60], [80,60], [60,60]]
     snake.direction = 'RIGHT'
     snake.growing = False
     food.respawn(snake.body)
@@ -126,6 +126,7 @@ while True:
         snake.move()
 
         if collision.check_food_collision(snake.body[0], food.position):
+
             snake.grow()
             score.add_points(10)
             food.respawn(snake.body)
