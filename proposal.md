@@ -38,8 +38,8 @@ We’ll structure development into several phases to keep work organized and col
   - *Responsible:* Elma and Kampe
 
 ### **Phase 2: Gameplay Logic**
-- [ ] **Implement random food placement and collision detection**  
-  - *Responsible:* [Team member 3]  
+- [x] **Implement random food placement and collision detection**  
+  - *Responsible:* Elma 
 - [ ] **Add score tracking and snake growth when food is eaten**  
   - *Responsible:* [Team member 1]  
 

@@ -1,6 +1,7 @@
 from src.wa.member1 import Food, CollisionDetector, Score
 from src.wa.member2 import *
 from src.wa.member3 import *
+from src.wa.member4 import *
 
 """
 Main Snake Game - Brings everyone's work together
