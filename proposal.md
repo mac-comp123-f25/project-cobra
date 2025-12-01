@@ -40,8 +40,8 @@ We’ll structure development into several phases to keep work organized and col
 ### **Phase 2: Gameplay Logic**
 - [x] **Implement random food placement and collision detection**  
   - *Responsible:* Elma 
-- [ ] **Add score tracking and snake growth when food is eaten**  
-  - *Responsible:* [Team member 1]  
+- [x] **Add score tracking and snake growth when food is eaten**  
+  - *Responsible:* Jack and Elma  
 
 ### **Phase 3: Level Progression and Animation**
 - [ ] **Develop level system (increasing speed and time limits per level)**  
