@@ -6,6 +6,39 @@ import pygame
 import random
 
 
+class Snake:
+    def __init__(self, x, y, size=20):
+        self.size = size
+        self.body = [[x, y], [x - size, y], [x - 2 * size, y]]
+        self.direction = 'RIGHT'
+        self.growing = False  # ADD THIS FLAG
+
+    def move(self):
+        head = self.body[0]
+        if self.direction == 'UP':
+            new = [head[0], head[1] - self.size]
+        elif self.direction == 'DOWN':
+            new = [head[0], head[1] + self.size]
+        elif self.direction == 'LEFT':
+            new = [head[0] - self.size, head[1]]
+        else:
+            new = [head[0] + self.size, head[1]]
+
+        self.body.insert(0, new)
+
+        # Only pop tail if NOT growing
+        if not self.growing:
+            self.body.pop()
+        else:
+            self.growing = False  # Reset flag
+
+    def grow(self):
+        self.growing = True  # Set flag instead of adding segment
+
+    def draw(self, window):
+        for seg in self.body:
+            pygame.draw.rect(window, (0, 0, 255), (seg[0], seg[1], self.size, self.size))
+
 # FOOD CLASS - makes the red squares appear randomly
 class Food:
     def __init__(self, width, height, size=20):
@@ -53,7 +86,7 @@ class CollisionDetector:
 
     def check_food_collision(self, snake_head, food_position):
         # is the snake head on the same spot as food?
-        return snake_head == food_position
+        return snake_head[0] == food_position[0] and snake_head[1] == food_position[1]
 
     def check_self_collision(self, snake_body):
         # did the snake run into itself?

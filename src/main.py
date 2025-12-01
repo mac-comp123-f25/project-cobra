@@ -1,4 +1,4 @@
-from src.wa.member1 import Food, CollisionDetector, Score
+from src.wa.member1 import Snake, Food, CollisionDetector, Score
 from src.wa.member2 import *
 from src.wa.member3 import *
 from src.wa.member4 import *
@@ -25,14 +25,10 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 # snake (from Game_Snake.py)
-snake_pos = [100, 50]
-snake_body = [[100, 50], [80, 50], [60, 50]]  # Full snake body
-snake_size = 20
-snake_direction = 'RIGHT'
-change_to = snake_direction
+snake = Snake(100, 50, 20)
 
 #game objects (this ia from member1.py)
-food = Food(WIDTH, HEIGHT, snake_size)
+food = Food(WIDTH, HEIGHT, 20)
 collision = CollisionDetector(WIDTH, HEIGHT)
 score = Score()
 
@@ -78,12 +74,11 @@ def draw_game_over():
 
 def reset_game():
     """Reset everything"""
-    global snake_pos, snake_body, snake_direction, change_to, game_over, game_started
-    snake_pos = [100, 50]
-    snake_body = [[100, 50], [80, 50], [60, 50]]
-    snake_direction = 'RIGHT'
-    change_to = snake_direction
-    food.respawn(snake_body)
+    global game_over, game_started
+    snake.body = [[100, 50], [80,50], [60,50]]
+    snake.direction = 'RIGHT'
+    snake.growing = False
+    food.respawn(snake.body)
     score.reset()
     game_over = False
     game_started = False
@@ -107,14 +102,14 @@ while True:
 
             # controls (and they prevent 180° turns)
             if game_started and not game_over:
-                if event.key == pygame.K_UP and snake_direction != 'DOWN':
-                    change_to = 'UP'
-                elif event.key == pygame.K_DOWN and snake_direction != 'UP':
-                    change_to = 'DOWN'
-                elif event.key == pygame.K_LEFT and snake_direction != 'RIGHT':
-                    change_to = 'LEFT'
-                elif event.key == pygame.K_RIGHT and snake_direction != 'LEFT':
-                    change_to = 'RIGHT'
+                if event.key == pygame.K_UP:
+                    snake.direction = 'UP'
+                elif event.key == pygame.K_DOWN:
+                    snake.direction = 'DOWN'
+                elif event.key == pygame.K_LEFT:
+                    snake.direction = 'LEFT'
+                elif event.key == pygame.K_RIGHT:
+                    snake.direction = 'RIGHT'
 
     #filling th background
     window.fill(GREEN)
@@ -123,46 +118,26 @@ while True:
         draw_start_screen()
     elif game_over:
         # Draw final state
-        for segment in snake_body:
-            pygame.draw.rect(window, BLUE, (segment[0], segment[1], snake_size, snake_size))
+        snake.draw(window)
         food.draw(window)
         draw_game_over()
     else:
         # this update direction
-        snake_direction = change_to
+        snake.move()
 
-        #Move snake
-        if snake_direction == 'UP':
-            snake_pos[1] -= snake_size
-        elif snake_direction == 'DOWN':
-            snake_pos[1] += snake_size
-        elif snake_direction == 'LEFT':
-            snake_pos[0] -= snake_size
-        elif snake_direction == 'RIGHT':
-            snake_pos[0] += snake_size
+        if collision.check_food_collision(snake.body[0], food.position):
+            snake.grow()
+            score.add_points(10)
+            food.respawn(snake.body)
 
-        # added new head position
-        snake_body.insert(0, list(snake_pos))
-
-        # check if snake ate food (using collision detector)
-        if collision.check_food_collision(snake_pos, food.position):
-            score.add_points(10)  #score system
-            food.respawn(snake_body)  # food respawn
-        else:
-            snake_body.pop()  # Remove tail if no food eaten
-
-        #checking collisions (using collision detector)
-        if collision.check_wall_collision(snake_pos):
+        if collision.check_wall_collision(snake.body[0]):
             game_over = True
 
-        if collision.check_self_collision(snake_body):
+        if collision.check_self_collision(snake.body):
             game_over = True
 
-        # Draw everything
-        for segment in snake_body:
-            pygame.draw.rect(window, BLUE, (segment[0], segment[1], snake_size, snake_size))
-
-        food.draw(window)  # food drawing
+        snake.draw(window)
+        food.draw(window)
         score.draw(window)  #score display
 
     pygame.display.update()
