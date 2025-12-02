@@ -55,12 +55,12 @@ class Food:
         y = random.randint(0, (self.height // self.size) - 1) * self.size
         return [x, y]
 
-    def respawn(self, snake_body):
-        # keep generating new positions until we find one that's not on the snake
+    def respawn(self, snake_body, obstacles=None):
         while True:
             self.position = self.generate_position()
             if self.position not in snake_body:
-                break  # found a good spot!
+                if obstacles is None or self.position not in obstacles:
+                    break
 
     def draw(self, window):
         # just a red square
