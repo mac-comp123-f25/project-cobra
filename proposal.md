@@ -44,7 +44,7 @@ We’ll structure development into several phases to keep work organized and col
   - *Responsible:* Jack and Elma  
 
 ### **Phase 3: Level Progression**
-- [ ] **Develop level system (increasing speed, adding obstacles and adding 3 level)**  
+- [x] **Develop level system (increasing speed, adding obstacles and adding 3 level)**  
   - *Responsible:* Jack   
 
 ### **Phase 4: Testing and Final Polish**
@@ -54,11 +54,11 @@ We’ll structure development into several phases to keep work organized and col
   - *Responsible:* Kampe
 - [ ] **Gameover animations**
   - *Responsible:* Kampe
--  [ ] **Addify gamebackground**
+- [ ] **Addify gamebackground**
   - *Responsible:* Thusa
--  [ ] **Addify game START screen**
+- [ ] **Addify game START screen**
   - *Responsible:* Elma
--  [ ] **Addify game END screen**
+- [ ] **Addify game END screen**
   - *Responsible:* Jack     
 
 ### **Phase 5: Documentation and Submission**
