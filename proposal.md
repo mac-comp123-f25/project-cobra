@@ -44,19 +44,26 @@ We’ll structure development into several phases to keep work organized and col
   - *Responsible:* Jack and Elma  
 
 ### **Phase 3: Level Progression**
-- [ ] **Develop level system (increasing speed, adding obstacles and adding 3 level)**  
-  - *Responsible:* [Jack]   
+- [x] **Develop level system (increasing speed, adding obstacles and adding 3 level)**  
+  - *Responsible:* Jack   
 
 ### **Phase 4: Testing and Final Polish**
 - [ ] **Debug and test gameplay (collision, timing, and animation)**  
-  - *Responsible:* [Team member 3]  
+  - *Responsible:* Thusa  
 - [ ] **Addify snake graphics and background music**  
-  - *Responsible:* [Kampe]
+  - *Responsible:* Kampe
 - [ ] **Gameover animations**
-  - *Responsible:* [Kampe]
--    
+  - *Responsible:* Kampe
+- [ ] **Addify gamebackground**
+  - *Responsible:* Thusa
+- [ ] **Addify game START screen**
+  - *Responsible:* Elma
+- [ ] **Addify game END screen**
+  - *Responsible:* Jack     
 
 ### **Phase 5: Documentation and Submission**
+- [ ] **Final Presentation: Create presentation and record**  
+  - *Responsible:* All members
 - [ ] **Write README file with clear installation and gameplay instructions**  
   - *Responsible:* All members  
 - [ ] **Finalize proposal and submit final project deliverables**  
