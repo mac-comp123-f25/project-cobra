@@ -36,8 +36,51 @@ class Snake:
         self.growing = True  # Set flag instead of adding segment
 
     def draw(self, window):
-        for seg in self.body:
-            pygame.draw.rect(window, (0, 0, 255), (seg[0], seg[1], self.size, self.size))
+        BLUE = (0, 0, 255)
+        WHITE = (255, 255, 255)
+        BLACK = (0, 0, 0)
+
+        for i, seg in enumerate(self.body):
+            pygame.draw.rect(window, BLUE, (seg[0], seg[1], self.size, self.size))
+
+            # Eyes only on the head
+            if i == 0:
+                cx = seg[0] + self.size // 2
+                cy = seg[1] + self.size // 2
+
+                # bigger eyes
+                eye_radius = self.size // 4
+                pupil_radius = self.size // 8
+
+                # Eye placement changes with direction
+                if self.direction == "UP":
+                    eye1 = (cx - 6, cy - 7)
+                    eye2 = (cx + 6, cy - 7)
+                    pupil_offset = (0, -2)
+
+                elif self.direction == "DOWN":
+                    eye1 = (cx - 6, cy + 7)
+                    eye2 = (cx + 6, cy + 7)
+                    pupil_offset = (0, +2)
+
+                elif self.direction == "LEFT":
+                    eye1 = (cx - 7, cy - 6)
+                    eye2 = (cx - 7, cy + 6)
+                    pupil_offset = (-2, 0)
+
+                else:  # RIGHT
+                    eye1 = (cx + 7, cy - 6)
+                    eye2 = (cx + 7, cy + 6)
+                    pupil_offset = (+2, 0)
+
+                # Draw eyeballs
+                pygame.draw.circle(window, WHITE, eye1, eye_radius)
+                pygame.draw.circle(window, WHITE, eye2, eye_radius)
+
+                # Draw pupils
+                pygame.draw.circle(window, BLACK, (eye1[0] + pupil_offset[0], eye1[1] + pupil_offset[1]), pupil_radius)
+                pygame.draw.circle(window, BLACK, (eye2[0] + pupil_offset[0], eye2[1] + pupil_offset[1]), pupil_radius)
+
 
 # FOOD CLASS - makes the red squares appear randomly
 class Food:
@@ -61,12 +104,25 @@ class Food:
             if self.position not in snake_body:
                 if obstacles is None or self.position not in obstacles:
                     break
-
+#Drawing the apple
     def draw(self, window):
-        # just a red square
         RED = (255, 0, 0)
-        pygame.draw.rect(window, RED,
-                         (self.position[0], self.position[1], self.size, self.size))
+        BROWN = (139, 69, 19)
+        GREEN = (0, 255, 0)
+
+        # apple body (circle)
+        center_x = self.position[0] + self.size // 2
+        center_y = self.position[1] + self.size // 2
+        radius = self.size // 2
+        pygame.draw.circle(window, RED, (center_x, center_y), radius)
+
+        # stem
+        pygame.draw.rect(window, BROWN,
+                         (center_x - 2, center_y - radius - 3, 4, 6))
+
+        # leaf
+        pygame.draw.ellipse(window, GREEN,
+                            (center_x + 2, center_y - radius, 8, 5))
 
 
 # COLLISION DETECTOR - checks if snake hits stuff
