@@ -26,6 +26,10 @@ music_icon_on = pygame.transform.scale(music_icon_on, (icon_size, icon_size))
 music_icon_off = pygame.transform.scale(music_icon_off, (icon_size, icon_size))
 music_rect = pygame.Rect(10, 50, icon_size, icon_size)  # top-left corner
 
+cobra_logo = pygame.image.load("StartGame_Cobra.png")
+cobra_logo = pygame.transform.scale(cobra_logo, (600, 400))  # adjust size
+
+
 
 # window size
 WIDTH, HEIGHT = 600, 400
@@ -61,6 +65,7 @@ OBSTACLE_COUNT = 8             # number of obstacles for medium/hard
 def draw_start_screen():
     """Start screen with difficulty options"""
     window.fill(BLACK)
+    window.blit(cobra_logo, (0, 0))
 
     # draw music icon
     if music_on:
@@ -68,18 +73,27 @@ def draw_start_screen():
     else:
         window.blit(music_icon_off, (music_rect.x, music_rect.y))
 
-    font_title = pygame.font.Font(None, 64)
-    font_text = pygame.font.Font(None, 32)
+    # difficulty options
+    font_small = pygame.font.Font(None, 20)  # Smaller font (was 24)
+    corner_x = 15  # Left side
+    corner_y = 90  # Below music icon
+    box_surface = pygame.Surface((110, 90))  # Smaller box
+    box_surface.set_alpha(180)
+    box_surface.fill(BLACK)
+    window.blit(box_surface, (corner_x - 5, corner_y - 5))
 
-    title = font_title.render('COBRA SNAKE', True, GREEN)
-    window.blit(title, title.get_rect(center=(WIDTH // 2, HEIGHT // 4)))
+    #difficulty options
+    title_text = font_small.render('SELECT:', True, WHITE)
+    window.blit(title_text, (corner_x, corner_y))
 
-    window.blit(font_text.render('Press 1 for EASY', True, WHITE),
-                (WIDTH//2 - 100, HEIGHT//2 - 40))
-    window.blit(font_text.render('Press 2 for MEDIUM', True, WHITE),
-                (WIDTH//2 - 100, HEIGHT//2))
-    window.blit(font_text.render('Press 3 for HARD', True, WHITE),
-                (WIDTH//2 - 100, HEIGHT//2 + 40))
+    easy = font_small.render('1 - Easy', True, GREEN)
+    window.blit(easy, (corner_x, corner_y + 20))
+
+    medium = font_small.render('2 - Medium', True, (255, 255, 0))
+    window.blit(medium, (corner_x, corner_y + 40))
+
+    hard = font_small.render('3 - Hard', True, (255, 100, 100))
+    window.blit(hard, (corner_x, corner_y + 60))
 
 
 def draw_game_over():
