@@ -43,17 +43,18 @@ We’ll structure development into several phases to keep work organized and col
 - [x] **Add score tracking and snake growth when food is eaten**  
   - *Responsible:* Jack and Elma  
 
-### **Phase 3: Level Progression and Animation**
-- [ ] **Develop level system (increasing speed and time limits per level)**  
-  - *Responsible:* [Team member 2] 
-- [ ] **Create “Cobra puff” celebration animation after level completion**  
-  - *Responsible:* [Team member 2]  
+### **Phase 3: Level Progression**
+- [ ] **Develop level system (increasing speed, adding obstacles and adding 3 level)**  
+  - *Responsible:* [Jack]   
 
 ### **Phase 4: Testing and Final Polish**
 - [ ] **Debug and test gameplay (collision, timing, and animation)**  
   - *Responsible:* [Team member 3]  
-- [ ] **Add background music, start screen, and game-over messages**  
-  - *Responsible:* [Team member 1]  
+- [ ] **Addify snake graphics and background music**  
+  - *Responsible:* [Kampe]
+- [ ] **Gameover animations**
+  - *Responsible:* [Kampe]
+-    
 
 ### **Phase 5: Documentation and Submission**
 - [ ] **Write README file with clear installation and gameplay instructions**  
