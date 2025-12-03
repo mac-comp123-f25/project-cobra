@@ -12,6 +12,20 @@ import pygame
 import sys
 
 pygame.init()
+pygame.mixer.music.load("backgroundmusic.mp3")   # load your music file
+pygame.mixer.music.set_volume(0.5)          # set volume (0.0 - 1.0)
+pygame.mixer.music.play(-1)                 # -1 = loop indefinitely
+music_on = True                              # track if music is on
+
+
+
+music_icon_on = pygame.image.load("music_on.png")
+music_icon_off = pygame.image.load("music_off.png")
+icon_size = 32
+music_icon_on = pygame.transform.scale(music_icon_on, (icon_size, icon_size))
+music_icon_off = pygame.transform.scale(music_icon_off, (icon_size, icon_size))
+music_rect = pygame.Rect(10, 50, icon_size, icon_size)  # top-left corner
+
 
 # window size
 WIDTH, HEIGHT = 600, 400
@@ -47,6 +61,12 @@ OBSTACLE_COUNT = 8             # number of obstacles for medium/hard
 def draw_start_screen():
     """Start screen with difficulty options"""
     window.fill(BLACK)
+
+    # draw music icon
+    if music_on:
+        window.blit(music_icon_on, (music_rect.x, music_rect.y))
+    else:
+        window.blit(music_icon_off, (music_rect.x, music_rect.y))
 
     font_title = pygame.font.Font(None, 64)
     font_text = pygame.font.Font(None, 32)
@@ -107,6 +127,16 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+            #  MUSIC TOGGLE
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if music_rect.collidepoint(event.pos):
+                if music_on:
+                    pygame.mixer.music.pause()
+                    music_on = False
+                else:
+                    pygame.mixer.music.unpause()
+                    music_on = True
 
         if event.type == pygame.KEYDOWN:
 
@@ -143,6 +173,11 @@ while True:
                     snake.direction = 'RIGHT'
 
     window.fill(GREEN)
+
+    if music_on:
+        window.blit(music_icon_on, (music_rect.x, music_rect.y))
+    else:
+        window.blit(music_icon_off, (music_rect.x, music_rect.y))
 
 
     # ON START SCREEN
