@@ -56,7 +56,7 @@ We’ll structure development into several phases to keep work organized and col
   - *Responsible:* Kampe
 -  [ ] **Addify gamebackground**
   - *Responsible:* Thusa
- -  [ ] **Addify game START screen**
+-  [ ] **Addify game START screen**
   - *Responsible:* Elma
 -  [ ] **Addify game END screen**
   - *Responsible:* Jack     
