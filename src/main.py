@@ -1,3 +1,5 @@
+from pygame.examples.grid import TILE_SIZE
+
 from src.wa.member1 import Snake, Food, CollisionDetector, Score
 from src.wa.member2 import *
 from src.wa.member3 import *
@@ -5,7 +7,6 @@ from src.wa.member4 import *
 
 """
 Main Snake Game - Updated with Difficulty Levels
-Uses: Game_Snake.py as base + member1.py (Elma's work) + member2 (level system)
 """
 
 import pygame
@@ -41,6 +42,11 @@ GREEN = (108, 187, 60)
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+LIGHT_GREEN = (130, 200, 100)
+DARK_GREEN = (110, 180, 80)
+
+# size of each checkered square
+TILE_SIZE = 40
 
 # snake object
 snake = Snake(100, 60, 20)
@@ -94,6 +100,21 @@ def draw_start_screen():
 
     hard = font_small.render('3 - Hard', True, (255, 100, 100))
     window.blit(hard, (corner_x, corner_y + 60))
+
+
+def draw_checkered_background():
+    """Draws checkered background"""
+    for row in range(HEIGHT // TILE_SIZE + 1):
+        for col in range(WIDTH // TILE_SIZE + 1):
+            if (row + col) % 2 == 0:
+                color = LIGHT_GREEN
+            else:
+                color = DARK_GREEN
+            pygame.draw.rect(
+                window,
+                color,
+                (col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+            )
 
 
 def draw_game_over():
@@ -186,7 +207,9 @@ while True:
                 elif event.key == pygame.K_RIGHT:
                     snake.direction = 'RIGHT'
 
-    window.fill(GREEN)
+    # ON GAME SCREEN
+    if game_started and not game_over:
+        draw_checkered_background()
 
     if music_on:
         window.blit(music_icon_on, (music_rect.x, music_rect.y))
