@@ -24,11 +24,10 @@ class Snake:
         else:
             new = [head[0] + self.size, head[1]]
 
-        self.body.insert(0, new)
+        self.body.insert(0, new) #add new head
 
-        # Only pop tail if NOT growing
         if not self.growing:
-            self.body.pop()
+            self.body.pop() #remove tail
         else:
             self.growing = False  # Reset flag
 
