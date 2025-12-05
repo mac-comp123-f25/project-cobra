@@ -1,3 +1,5 @@
+from pygame.examples.grid import TILE_SIZE
+
 from src.wa.member1 import Snake, Food, CollisionDetector, Score
 #from src.wa.member2 import *
 from src.wa.member3 import *
@@ -5,13 +7,30 @@ from src.wa.member4 import *
 
 """
 Main Snake Game - Updated with Difficulty Levels
-Uses: Game_Snake.py as base + member1.py (Elma's work) + member2 (level system)
 """
 
 import pygame
 import sys
 
 pygame.init()
+pygame.mixer.music.load("backgroundmusic.mp3")   # load your music file
+pygame.mixer.music.set_volume(0.5)          # set volume (0.0 - 1.0)
+pygame.mixer.music.play(-1)                 # -1 = loop indefinitely
+music_on = True                              # track if music is on
+
+
+
+music_icon_on = pygame.image.load("music_on.png")
+music_icon_off = pygame.image.load("music_off.png")
+icon_size = 32
+music_icon_on = pygame.transform.scale(music_icon_on, (icon_size, icon_size))
+music_icon_off = pygame.transform.scale(music_icon_off, (icon_size, icon_size))
+music_rect = pygame.Rect(10, 50, icon_size, icon_size)  # top-left corner
+
+cobra_logo = pygame.image.load("StartGame_Cobra.png")
+cobra_logo = pygame.transform.scale(cobra_logo, (600, 400))  # adjust size
+
+
 
 # window size
 WIDTH, HEIGHT = 600, 400
@@ -26,7 +45,9 @@ WHITE = (255, 255, 255)
 LIGHT_GREEN = (130, 200, 100)
 DARK_GREEN = (110, 180, 80)
 
-TILE_SIZE = 40  # size of each checkered square
+
+# size of each checkered square
+TILE_SIZE = 40
 
 # snake object
 snake = Snake(100, 60, 20)
@@ -51,19 +72,35 @@ OBSTACLE_COUNT = 8             # number of obstacles for medium/hard
 def draw_start_screen():
     """Start screen with difficulty options"""
     window.fill(BLACK)
+    window.blit(cobra_logo, (0, 0))
 
-    font_title = pygame.font.Font(None, 64)
-    font_text = pygame.font.Font(None, 32)
+    # draw music icon
+    if music_on:
+        window.blit(music_icon_on, (music_rect.x, music_rect.y))
+    else:
+        window.blit(music_icon_off, (music_rect.x, music_rect.y))
 
-    title = font_title.render('COBRA SNAKE', True, GREEN)
-    window.blit(title, title.get_rect(center=(WIDTH // 2, HEIGHT // 4)))
+    # difficulty options
+    font_small = pygame.font.Font(None, 20)  # Smaller font (was 24)
+    corner_x = 15  # Left side
+    corner_y = 90  # Below music icon
+    box_surface = pygame.Surface((110, 90))  # Smaller box
+    box_surface.set_alpha(180)
+    box_surface.fill(BLACK)
+    window.blit(box_surface, (corner_x - 5, corner_y - 5))
 
-    window.blit(font_text.render('Press 1 for EASY', True, WHITE),
-                (WIDTH//2 - 100, HEIGHT//2 - 40))
-    window.blit(font_text.render('Press 2 for MEDIUM', True, WHITE),
-                (WIDTH//2 - 100, HEIGHT//2))
-    window.blit(font_text.render('Press 3 for HARD', True, WHITE),
-                (WIDTH//2 - 100, HEIGHT//2 + 40))
+    #difficulty options
+    title_text = font_small.render('SELECT:', True, WHITE)
+    window.blit(title_text, (corner_x, corner_y))
+
+    easy = font_small.render('1 - Easy', True, GREEN)
+    window.blit(easy, (corner_x, corner_y + 20))
+
+    medium = font_small.render('2 - Medium', True, (255, 255, 0))
+    window.blit(medium, (corner_x, corner_y + 40))
+
+    hard = font_small.render('3 - Hard', True, (255, 100, 100))
+    window.blit(hard, (corner_x, corner_y + 60))
 
 
 def draw_checkered_background():
@@ -79,6 +116,8 @@ def draw_checkered_background():
                 color,
                 (col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE)
             )
+
+
 
 
 def draw_game_over():
@@ -126,6 +165,16 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+            #  MUSIC TOGGLE
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if music_rect.collidepoint(event.pos):
+                if music_on:
+                    pygame.mixer.music.pause()
+                    music_on = False
+                else:
+                    pygame.mixer.music.unpause()
+                    music_on = True
 
         if event.type == pygame.KEYDOWN:
 
@@ -165,6 +214,11 @@ while True:
     # ON GAME SCREEN
     if game_started and not game_over:
         draw_checkered_background()
+
+    if music_on:
+        window.blit(music_icon_on, (music_rect.x, music_rect.y))
+    else:
+        window.blit(music_icon_off, (music_rect.x, music_rect.y))
 
 
     # ON START SCREEN
