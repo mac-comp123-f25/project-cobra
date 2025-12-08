@@ -1,24 +1,30 @@
 """
-member2.py: work on Background
-Thusa
+member2.py - Background and Visual Enhancements
+Author: Thusa
+Description: Checkered background pattern for gameplay
 """
 import pygame
 
-# window size
-WIDTH, HEIGHT = 600, 400
-window = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Cobra Snake Game")
-
-# softer green shades for the checkered background
+# Color definitions for checkered background
 LIGHT_GREEN = (130, 200, 100)
 DARK_GREEN = (110, 180, 80)
 
-TILE_SIZE = 40  # size of each checkered square
+# Tile size for checkered pattern
+TILE_SIZE = 40
 
-def draw_checkered_background():
-    for row in range(HEIGHT // TILE_SIZE + 1):
-        for col in range(WIDTH // TILE_SIZE + 1):
-            # alternate colors like a chessboard
+
+def draw_checkered_background(window, width, height):
+    """
+    Draw alternating light and dark green checkered pattern.
+
+    Args:
+        window (pygame.Surface): Game window surface to draw on
+        width (int): Width of the game window
+        height (int): Height of the game window
+    """
+    for row in range(height // TILE_SIZE + 1):
+        for col in range(width // TILE_SIZE + 1):
+            # Alternate colors like a chessboard
             if (row + col) % 2 == 0:
                 color = LIGHT_GREEN
             else:
@@ -28,19 +34,3 @@ def draw_checkered_background():
                 color,
                 (col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE)
             )
-draw_checkered_background()
-
-# ON GAME SCREEN
-if game_started and not game_over:
-    draw_checkered_background()
-
-# keep window open
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    pygame.display.update()
-
-pygame.quit()

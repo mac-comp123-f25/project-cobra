@@ -1,8 +1,6 @@
-# Project Title
+# Cobra Snake Game - Prototype
 
-Check the project requirements for what should go into this file.
+Our initial design sketch showing the game layout and core mechanics:
 
-
-
-Prototype of our snake game> 
-<object data="Snake_game_prototype.pdf" type="application/pdf" width="100%" height="600px"></object>
+![Prototype Design - Page 1](Snake_game_prototype_page1.png)
+![Prototype Design - Page 2](Snake_game_prototype_page2.png)

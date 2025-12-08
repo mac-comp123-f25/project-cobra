@@ -5,6 +5,7 @@
 - Elma M
 - Kampe R
 - Providence T (Thusa)
+- Jack
 
 ## Description
 Our project is an imitation of the classic **Snake Xenzia** game, inspired by the early 2000s mobile game that defined an era of simple yet addictive entertainment for us.  It is a significant game that marks our childhood.
@@ -48,15 +49,15 @@ We’ll structure development into several phases to keep work organized and col
   - *Responsible:* Jack   
 
 ### **Phase 4: Testing and Final Polish**
-- [ ] **Debug and test gameplay (collision, timing, and animation)**  
+- [x] **Debug and test gameplay (collision, timing, and animation)**  
   - *Responsible:* Thusa  
-- [ ] **Addify snake graphics and background music**  
+- [x] **Addify snake graphics and background music**  
   - *Responsible:* Kampe
 - [ ] **Gameover animations**
   - *Responsible:* Kampe
-- [ ] **Addify gamebackground**
+- [x] **Addify gamebackground**
   - *Responsible:* Thusa
-- [ ] **Addify game START screen**
+- [x] **Addify game START screen**
   - *Responsible:* Elma
 - [ ] **Addify game END screen**
   - *Responsible:* Jack     
